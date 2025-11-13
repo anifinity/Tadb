@@ -1,0 +1,42 @@
+[
+  {
+    "id": 3,
+    "title": "Doraemon: Nobita’s Earth Symphony",
+    "day": "Friday",
+    "time": "6:00 PM",
+    "platform": "Disney Channel",
+    "category": "tv",
+    "status": "Upcoming",
+    "episode": "1",
+    "poster": "https://www.posterhub.com.sg/images/detailed/142/29_1A_1B_ha0b-mh.jpg",
+    "releaseDate": "2025-11-14T00:00:00.000Z",
+    "type": "Movie"
+  },
+  {
+    "id": 4,
+    "title": "Let's Play",
+    "day": "Monday",
+    "time": "10:45 PM",
+    "platform": "Crunchyroll",
+    "category": "weekly",
+    "type": "Episodes",
+    "status": "Streaming",
+    "episode": "4",
+    "poster": "https://cdn.myanimelist.net/s/common/uploaded_files/1749088373-ac4fa2715f8d7b3e85f94d9c68b5b908.jpeg",
+    "releaseDate": "2025-10-22T00:00:00.000Z",
+    "addedToStreamingDate": "2025-11-12T18:30:00.000Z"
+  },
+  {
+    "id": 5,
+    "title": "One Punch Man Season 3",
+    "day": "Monday",
+    "time": "10:45 PM",
+    "platform": "Crunchyroll",
+    "category": "upcoming",
+    "type": "Episodes",
+    "status": "Upcoming",
+    "episode": "0",
+    "poster": "https://assets-prd.ignimgs.com/2022/08/18/one-punch-man-poster-1660838177219.jpeg",
+    "releaseDate": "2025-12-22T00:00:00.000Z"
+  }
+]

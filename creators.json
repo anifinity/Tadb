@@ -1,0 +1,278 @@
+[
+  {
+    "id": 1,
+    "name": "TADB",
+    "role": "Database Creator",
+    "dataCreator": "tadb",
+    "avatar": "https://blogger.googleusercontent.com/img/a/AVvXsEjMyJdgsufmZrNxfCdxv9X87MdndtuZP1mSaXtiRxeTUVEYKWRzMn6y1ZnrrZ2SEDuyidYa2M4RvY0uAi0KrP-evLJYsv0_YbGAXz3sT1DafCucVsYIq8BNk_9MNeRmvD6nIsFGKNbHISTfX0h4iqR0AecbKy8vl7WR5Y-kJT5-9PjbHTTL5wKIV495Jc8=s16000",
+    "bio": "Telugu Anime Database - Your ultimate source for Telugu anime content",
+    "badge": "Founder",
+    "stats": {
+      "stat1": {
+        "number": "50+",
+        "label": "Posts"
+      },
+      "stat2": {
+        "number": "10K+",
+        "label": "Followers"
+      },
+      "stat3": {
+        "number": "2024",
+        "label": "Founded"
+      }
+    },
+    "social": {
+      "instagram": "https://www.instagram.com/teluguanime.db/",
+      "youtube": "https://www.youtube.com/@Mugentales"
+    },
+    "suggestedAnimes": [
+      {
+        "title": "DanDaDan",
+        "platform": "Crunchyroll",
+        "rating": "8.3",
+        "episodes": "24 Episodes",
+        "genres": [
+          "Action",
+          "Comedy"
+        ],
+        "poster": "https://u.livechart.me/anime_visuals/local_version/10337/image/a4be70dfa4ae919f0c2470e1bbffb0b8.webp/large.jpg"
+      },
+      {
+        "title": "SPY x FAMILY",
+        "platform": "Crunchyroll",
+        "rating": "8.8",
+        "episodes": "25 Episodes",
+        "genres": [
+          "Action",
+          "Comedy"
+        ],
+        "poster": "https://u.livechart.me/anime/visual/6875/image/00524cc5d2d7dd8506da05bd4d10d38e.jfif/large.jpg"
+      }
+    ],
+    "latestVideos": [
+      {
+        "title": "Latest Telugu Anime Updates",
+        "channel": "TADB Team",
+        "views": "1.2K views",
+        "time": "2 days ago",
+        "duration": "10:25",
+        "videoId": "dQw4w9WgXcQ"
+      },
+      {
+        "title": "Database Creation Process",
+        "channel": "TADB Team",
+        "views": "2.5K views",
+        "time": "5 days ago",
+        "duration": "15:30",
+        "videoId": "dQw4w9WgXcQ"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Telchi Anime",
+    "role": "YouTube Channel",
+    "dataCreator": "telchi",
+    "avatar": "https://via.placeholder.com/120x120/133978/ffffff?text=TC",
+    "bio": "Dedicated to bringing the best Telugu anime content and reviews to the community. Creating engaging videos about anime culture and Telugu dubbing.",
+    "badge": "Channel",
+    "stats": {
+      "stat1": {
+        "number": "25+",
+        "label": "Videos"
+      },
+      "stat2": {
+        "number": "5K+",
+        "label": "Subscribers"
+      },
+      "stat3": {
+        "number": "100K+",
+        "label": "Views"
+      }
+    },
+    "social": {
+      "instagram": "",
+      "youtube": ""
+    },
+    "suggestedAnimes": [
+      {
+        "title": "Black Butler Public School",
+        "platform": "Crunchyroll",
+        "rating": "8.2",
+        "episodes": "36 Episodes",
+        "genres": [
+          "Mystery",
+          "Supernatural"
+        ],
+        "poster": "https://u.livechart.me/anime/visual/6884/image/7963459087c881bb8db7eb20830a4ef8.png/large.jpg"
+      },
+      {
+        "title": "Vinland Saga",
+        "platform": "Crunchyroll",
+        "rating": "8.9",
+        "episodes": "24 Episodes",
+        "genres": [
+          "Action",
+          "Historical"
+        ],
+        "poster": "https://u.livechart.me/anime_visuals/local_version/2981/image/80070608f5d264e77b0bb4f1fe24096b.webp/large.jpg"
+      }
+    ],
+    "latestVideos": [
+      {
+        "title": "Anime Review: Naruto Telugu Dub",
+        "channel": "Telchi Anime",
+        "views": "3.1K views",
+        "time": "3 days ago",
+        "duration": "12:15",
+        "videoId": "dQw4w9WgXcQ"
+      },
+      {
+        "title": "Top 10 Telugu Dubbed Anime",
+        "channel": "Telchi Anime",
+        "views": "1.8K views",
+        "time": "1 week ago",
+        "duration": "8:45",
+        "videoId": "dQw4w9WgXcQ"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Professor",
+    "role": "Digital Artist",
+    "dataCreator": "professor",
+    "avatar": "https://via.placeholder.com/120x120/ff6b35/ffffff?text=P",
+    "bio": "Creating amazing artwork and designs for the Telugu anime community. Specializing in character art, fan art, and digital illustrations.",
+    "badge": "Artist",
+    "stats": {
+      "stat1": {
+        "number": "100+",
+        "label": "Artworks"
+      },
+      "stat2": {
+        "number": "3K+",
+        "label": "Likes"
+      },
+      "stat3": {
+        "number": "500+",
+        "label": "Shares"
+      }
+    },
+    "social": {
+      "instagram": "",
+      "youtube": ""
+    },
+    "suggestedAnimes": [
+      {
+        "title": "Gachiakuta",
+        "platform": "Crunchyroll",
+        "rating": "8.1",
+        "episodes": "12 Episodes",
+        "genres": [
+          "Adventure",
+          "Comedy"
+        ],
+        "poster": "https://u.livechart.me/anime_visuals/local_version/14169/image/1c76fdcf1cdd76892b407e54f7fdb542.webp/large.jpg"
+      },
+      {
+        "title": "Ranking of Kings",
+        "platform": "Crunchyroll",
+        "rating": "8.7",
+        "episodes": "23 Episodes",
+        "genres": [
+          "Fantasy",
+          "Adventure"
+        ],
+        "poster": "https://u.livechart.me/anime_visuals/local_version/213/image/da11f281fa013322c52cf32ae7663437.jpeg/large.jpg"
+      }
+    ],
+    "latestVideos": [
+      {
+        "title": "Editing Process Explained",
+        "channel": "Professor",
+        "views": "890 views",
+        "time": "1 week ago",
+        "duration": "8:45",
+        "videoId": "dQw4w9WgXcQ"
+      },
+      {
+        "title": "Digital Art Tutorial",
+        "channel": "Professor",
+        "views": "1.5K views",
+        "time": "4 days ago",
+        "duration": "15:20",
+        "videoId": "dQw4w9WgXcQ"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Rae",
+    "role": "YouTube Channel",
+    "dataCreator": "rae",
+    "avatar": "https://i.pinimg.com/736x/8a/ef/e5/8aefe52d46163b04fcd593350459327a.jpg",
+    "bio": "Specializing in anime poster designs and visual content creation. Creating stunning graphics for the Telugu anime community.",
+    "badge": "Channel",
+    "stats": {
+      "stat1": {
+        "number": "416+",
+        "label": "Posts"
+      },
+      "stat2": {
+        "number": "38L+",
+        "label": "Views"
+      },
+      "stat3": {
+        "number": "25k+",
+        "label": "Subscribers"
+      }
+    },
+    "social": {
+      "instagram": "https://www.instagram.com/rae_telugu_/",
+      "youtube": "https://www.youtube.com/@rowoof"
+    },
+    "suggestedAnimes": [
+      {
+        "title": "SPY x FAMILY",
+        "platform": "Crunchyroll",
+        "rating": "8.8",
+        "episodes": "25 Episodes",
+        "genres": [
+          "Action",
+          "Comedy"
+        ],
+        "poster": "https://u.livechart.me/anime/visual/6875/image/00524cc5d2d7dd8506da05bd4d10d38e.jfif/large.jpg"
+      },
+      {
+        "title": "DanDaDan",
+        "platform": "Crunchyroll",
+        "rating": "8.3",
+        "episodes": "24 Episodes",
+        "genres": [
+          "Action",
+          "Comedy"
+        ],
+        "poster": "https://image.tmdb.org/t/p/original/okRnvNLpduDKPUIyZbMxJkeek8D.jpg"
+      }
+    ],
+    "latestVideos": [
+      {
+        "title": "Poster Design Process",
+        "channel": "Rae",
+        "views": "750 views",
+        "time": "2 days ago",
+        "duration": "6:30",
+        "videoId": "u2QaG4G74Kg"
+      },
+      {
+        "title": "Graphic Design Tips",
+        "channel": "Rae",
+        "views": "1.1K views",
+        "time": "6 days ago",
+        "duration": "11:45",
+        "videoId": "u2QaG4G74Kg"
+      }
+    ]
+  }
+]
