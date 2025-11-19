@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Generator - TADB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #133978, #1e4fa1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1e4fa1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group select {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group select option {
+            color: #000000;
+            background: #ffffff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e4fa1;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #133978, #1e4fa1);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(19, 57, 120, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .code-output {
+            background: #1a1a2e;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #10b981;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .examples {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .examples h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1e4fa1;
+        }
+
+        .example-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .example-item h4 {
+            color: #1e4fa1;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .example-item p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 412px) {
+            .form-group textarea {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> Post Generator</h1>
+            <p>Simple tool to generate post data - Just fill the form!</p>
+            
+            <!-- Recent Post ID Display -->
+            <div style="margin-top: 15px; padding: 12px 20px; background: linear-gradient(135deg, rgba(19, 57, 120, 0.3), rgba(30, 79, 161, 0.3)); border: 2px solid rgba(30, 79, 161, 0.5); border-radius: 12px; display: inline-block;">
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 5px;">
+                    <i class="fas fa-database"></i> Most Recent Post ID:
+                </p>
+                <p style="font-size: 1.8rem; font-weight: 800; color: #1e4fa1; margin: 0;" id="recentPostId">
+                    Loading...
+                </p>
+                <p style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 5px;">
+                    Use ID <span id="nextPostId" style="color: #10b981; font-weight: 700;">-</span> for your next post
+                </p>
+            </div>
+            
+            <!-- Search/Load Existing Post -->
+            <div style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="searchPost" placeholder="Enter Post ID or Title to load existing post..." style="flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; color: white; font-size: 0.95rem;">
+                    <button class="btn" onclick="searchAndLoadPost()" style="white-space: nowrap;">
+                        <i class="fas fa-search"></i> Load Post
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 8px; text-align: center;">
+                    <i class="fas fa-info-circle"></i> Search by ID (e.g., "2") or Title (e.g., "DanDaDan") to edit existing posts
+                </p>
+            </div>
+            
+
+        </div>
+
+        <div class="main-grid">
+            <!-- Input Form -->
+            <div class="section">
+                <h2><i class="fas fa-edit"></i> Post Details</h2>
+                
+                <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" id="id" placeholder="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="title" placeholder="Enter anime title">
+                </div>
+
+                <div class="form-group">
+                    <label>Year</label>
+                    <input type="text" id="year" placeholder="2024">
+                </div>
+
+                <div class="form-group">
+                    <label>Season</label>
+                    <select id="season">
+                        <option value="Spring">Spring</option>
+                        <option value="Summer">Summer</option>
+                        <option value="Fall" selected>Fall</option>
+                        <option value="Winter">Winter</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Rating</label>
+                    <input type="text" id="rating" placeholder="8.3">
+                </div>
+
+                <div class="form-group">
+                    <label>Age Rating</label>
+                    <select id="ageRating">
+                        <option value="G / All Ages">G / All Ages</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13" selected>PG-13</option>
+                        <option value="PG-14+">PG-14+</option>
+                        <option value="PG-16+">PG-16+</option>
+                        <option value="PG-18">PG-18</option>
+                        <option value="R+ / Adults Only">R+ / Adults Only</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Poster URL</label>
+                    <input type="text" id="poster" placeholder="https://example.com/poster.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label>Backdrop URL</label>
+                    <input type="text" id="backdrop" placeholder="https://example.com/backdrop.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label>Genres</label>
+                    <input type="text" id="genres" placeholder="Action, Adventure, Comedy">
+                </div>
+
+                <div class="form-group">
+                    <label>Synopsis</label>
+                    <textarea id="synopsis" placeholder="Enter anime synopsis"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Studio</label>
+                    <input type="text" id="studio" placeholder="Science SARU">
+                </div>
+
+                <div class="form-group">
+                    <label>Format</label>
+                    <input type="text" id="format" placeholder="Season 01">
+                </div>
+
+                <div class="form-group">
+                    <label>Duration</label>
+                    <input type="text" id="duration" placeholder="24 min">
+                </div>
+
+                <div class="form-group">
+                    <label>Total Episodes</label>
+                    <input type="text" id="totalEpisodes" placeholder="12">
+                </div>
+
+                <div class="form-group">
+                    <label>Premiere Date</label>
+                    <input type="text" id="premiereDate" placeholder="Released on 2024">
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="status">
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed" selected>Completed</option>
+                        <option value="Upcoming">Upcoming</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Broadcast</label>
+                    <input type="text" id="broadcast" placeholder="OTT (Crunchyroll)">
+                </div>
+
+                <div class="form-group">
+                    <label>Language</label>
+                    <input type="text" id="language" placeholder="Telugu Dub Available">
+                </div>
+
+                <div class="form-group">
+                    <label>Platform Label (for filtering)</label>
+                    <input type="text" id="platformLabel" placeholder="e.g., Crunchyroll, Netflix, Anime Times" list="platformSuggestions">
+                    <datalist id="platformSuggestions">
+                        <option value="Crunchyroll">
+                        <option value="Netflix">
+                        <option value="JioHotstar">
+                        <option value="Anime Times">
+                        <option value="Muse">
+                        <option value="MTV">
+                        <option value="Cartoon Network">
+                        <option value="ETV Plus">
+                        <option value="Discovery Plus">
+                        <option value="Disney">
+                    </datalist>
+                </div>
+
+                <div class="form-group">
+                    <label>View Count</label>
+                    <input type="text" id="viewCount" placeholder="2.1M">
+                </div>
+
+                <div class="form-group">
+                    <label>Liked Percentage</label>
+                    <input type="text" id="likedPercentage" placeholder="92%">
+                </div>
+
+                <div class="form-group">
+                    <label>MRP</label>
+                    <select id="mrp">
+                        <option value="none" selected>None</option>
+                        <option value="Visible">Visible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Spoiler Alert (Blur Synopsis)</label>
+                    <select id="spoilerAlert">
+                        <option value="none" selected>None</option>
+                        <option value="visible">Visible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-users"></i> Cast Members</span>
+                        <button class="btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addCastMember(); return false;">
+                            <i class="fas fa-plus"></i> Add Cast
+                        </button>
+                    </label>
+                    <div id="castContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Cast members will be added here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-user-tie"></i> Crew Members</span>
+                        <button class="btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addCrewMember(); return false;">
+                            <i class="fas fa-plus"></i> Add Crew
+                        </button>
+                    </label>
+                    <div id="crewContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Crew members will be added here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-building"></i> Dubbing Studios</span>
+                        <button class="btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addDubbingStudio(); return false;">
+                            <i class="fas fa-plus"></i> Add Studio
+                        </button>
+                    </label>
+                    <div id="dubbingStudiosContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Dubbing studios will be added here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-tv"></i> Platforms</span>
+                        <button class="btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addPlatform(); return false;">
+                            <i class="fas fa-plus"></i> Add Platform
+                        </button>
+                    </label>
+                    <div id="platformsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Platforms will be added here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-video"></i> Trailers</span>
+                        <button class="btn" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addTrailer(); return false;">
+                            <i class="fas fa-plus"></i> Add Trailer
+                        </button>
+                    </label>
+                    <div id="trailersContainer" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Trailers will be added here -->
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="generateCode()">
+                        <i class="fas fa-magic"></i> Generate Code
+                    </button>
+                    <button class="btn btn-success" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output -->
+            <div class="section">
+                <h2><i class="fas fa-code"></i> Generated Code</h2>
+                <div class="code-output" id="output">
+// Your generated code will appear here...
+                </div>
+            </div>
+        </div>
+
+        <!-- Examples -->
+        <div class="examples">
+            <h3><i class="fas fa-lightbulb"></i> Quick Examples - Click to Load</h3>
+            
+            <div class="example-item" onclick="loadExample1()">
+                <h4>Example 1: Demon Slayer</h4>
+                <p><strong>Title:</strong> Demon Slayer: Kimetsu no Yaiba</p>
+                <p><strong>Genre:</strong> Action, Fantasy, Supernatural</p>
+                <p><strong>Rating:</strong> 8.7</p>
+            </div>
+
+            <div class="example-item" onclick="loadExample2()">
+                <h4>Example 2: Attack on Titan</h4>
+                <p><strong>Title:</strong> Attack on Titan</p>
+                <p><strong>Genre:</strong> Action, Drama, Dark Fantasy</p>
+                <p><strong>Rating:</strong> 9.0</p>
+            </div>
+
+            <div class="example-item" onclick="loadExample3()">
+                <h4>Example 3: My Hero Academia</h4>
+                <p><strong>Title:</strong> My Hero Academia</p>
+                <p><strong>Genre:</strong> Action, Superhero, School</p>
+                <p><strong>Rating:</strong> 8.4</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Code copied to clipboard!</span>
+    </div>
+
+    <!-- Load posts data -->
+    <script src="posts-data.js"></script>
+    <script src="posts-manager.js"></script>
+
+    <script>
+        let castMembers = [];
+        let crewMembers = [];
+        let platforms = [];
+        let trailers = [];
+        let postsData = []; // Will store all posts from posts-data.js
+        
+        // Load posts data from localStorage or posts-data.js
+        function loadPostsData() {
+            // Try to get from localStorage first (if posts-manager.js is loaded)
+            if (typeof postsManager !== 'undefined' && postsManager.getAllPosts) {
+                postsData = postsManager.getAllPosts();
+                console.log('✅ Loaded', postsData.length, 'posts from localStorage');
+            } else if (typeof window.POSTS_DATA !== 'undefined') {
+                // Fallback to posts-data.js
+                postsData = window.POSTS_DATA;
+                console.log('✅ Loaded', postsData.length, 'posts from POSTS_DATA');
+            } else if (typeof posts !== 'undefined') {
+                // Another fallback
+                postsData = posts;
+                console.log('✅ Loaded', postsData.length, 'posts from posts variable');
+            } else {
+                console.error('❌ No posts data found');
+                postsData = [];
+            }
+        }
+        
+        // Search and load post by ID or Title
+        function searchAndLoadPost() {
+            const searchTerm = document.getElementById('searchPost').value.trim();
+            console.log('🔍 Searching for:', searchTerm);
+            
+            if (!searchTerm) {
+                alert('Please enter a Post ID or Title');
+                return;
+            }
+            
+            loadPostsData();
+            console.log('📊 Total posts available:', postsData.length);
+            
+            if (postsData.length === 0) {
+                alert('No posts data found. Make sure posts-data.js is loaded.');
+                return;
+            }
+            
+            // Search by ID (exact match) or Title (partial match)
+            const post = postsData.find(p => 
+                p.id.toString() === searchTerm || 
+                p.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            console.log('🎯 Found post:', post);
+            
+            if (!post) {
+                alert(`No post found with ID or Title: "${searchTerm}"\n\nAvailable posts: ${postsData.map(p => `${p.id}: ${p.title}`).join(', ')}`);
+                return;
+            }
+            
+            // Clear existing dynamic fields
+            document.getElementById('castContainer').innerHTML = '';
+            document.getElementById('crewContainer').innerHTML = '';
+            document.getElementById('dubbingStudiosContainer').innerHTML = '';
+            document.getElementById('platformsContainer').innerHTML = '';
+            document.getElementById('trailersContainer').innerHTML = '';
+            castMembers = [];
+            crewMembers = [];
+            platforms = [];
+            trailers = [];
+            
+            // Fill basic fields
+            document.getElementById('id').value = post.id || '';
+            document.getElementById('title').value = post.title || '';
+            document.getElementById('year').value = post.year || '';
+            document.getElementById('season').value = post.season || 'Fall';
+            document.getElementById('rating').value = post.rating || '';
+            document.getElementById('ageRating').value = post.ageRating || 'PG-13';
+            document.getElementById('poster').value = post.poster || '';
+            document.getElementById('backdrop').value = post.backdrop || '';
+            document.getElementById('genres').value = post.genres || '';
+            document.getElementById('synopsis').value = post.synopsis || '';
+            document.getElementById('studio').value = post.studio || '';
+            document.getElementById('format').value = post.format || '';
+            document.getElementById('duration').value = post.duration || '';
+            document.getElementById('totalEpisodes').value = post.totalEpisodes || '';
+            document.getElementById('premiereDate').value = post.premiereDate || '';
+            document.getElementById('status').value = post.status || 'Completed';
+            document.getElementById('broadcast').value = post.broadcast || '';
+            document.getElementById('language').value = post.language || '';
+            document.getElementById('viewCount').value = post.viewCount || '';
+            document.getElementById('likedPercentage').value = post.statistics?.likedPercentage || '';
+            document.getElementById('mrp').value = post.mrp || 'none';
+            document.getElementById('spoilerAlert').value = post.spoilerAlert || 'none';
+            
+            // Load Cast
+            if (post.cast && post.cast.length > 0) {
+                post.cast.forEach(member => {
+                    addCastMember();
+                    const index = castMembers.length - 1;
+                    setTimeout(() => {
+                        const castItems = document.querySelectorAll('.cast-item');
+                        const item = castItems[index];
+                        item.querySelector('.cast-actor-name').value = member.actorName || '';
+                        item.querySelector('.cast-character-name').value = member.characterName || '';
+                        item.querySelector('.cast-platform').value = member.platform || '';
+                        item.querySelector('.cast-actor-image').value = member.actorImage || '';
+                        item.querySelector('.cast-character-image').value = member.characterImage || '';
+                        item.querySelector('.cast-description').value = member.description || '';
+                        item.querySelector('.cast-instagram').value = member.instagram || '';
+                        generateCode();
+                    }, 50);
+                });
+            }
+            
+            // Load Crew
+            if (post.crew && post.crew.length > 0) {
+                post.crew.forEach(member => {
+                    addCrewMember();
+                    const index = crewMembers.length - 1;
+                    setTimeout(() => {
+                        const crewItems = document.querySelectorAll('.crew-item');
+                        const item = crewItems[index];
+                        item.querySelector('.crew-name').value = member.name || '';
+                        item.querySelector('.crew-role').value = member.role || '';
+                        item.querySelector('.crew-platform').value = member.platform || '';
+                        item.querySelector('.crew-avatar').value = member.avatar || '';
+                        item.querySelector('.crew-project-image').value = member.projectImage || '';
+                        item.querySelector('.crew-description').value = member.description || '';
+                        item.querySelector('.crew-instagram').value = member.instagram || '';
+                        generateCode();
+                    }, 50);
+                });
+            }
+            
+            // Load Dubbing Studios
+            if (post.dubbingStudios && post.dubbingStudios.length > 0) {
+                post.dubbingStudios.forEach(studio => {
+                    addDubbingStudio();
+                    const index = dubbingStudios.length - 1;
+                    setTimeout(() => {
+                        const studioItems = document.querySelectorAll('.studio-item');
+                        const item = studioItems[index];
+                        item.querySelector('.studio-name').value = studio.name || '';
+                        item.querySelector('.studio-role').value = studio.role || '';
+                        item.querySelector('.studio-platform').value = studio.platform || '';
+                        item.querySelector('.studio-avatar').value = studio.avatar || '';
+                        item.querySelector('.studio-project-image').value = studio.projectImage || '';
+                        item.querySelector('.studio-description').value = studio.description || '';
+                        item.querySelector('.studio-instagram').value = studio.instagram || '';
+                        generateCode();
+                    }, 50);
+                });
+            }
+            
+            // Load Platforms
+            if (post.platforms && post.platforms.length > 0) {
+                post.platforms.forEach(platform => {
+                    addPlatform();
+                    const index = platforms.length - 1;
+                    setTimeout(() => {
+                        const platformItems = document.querySelectorAll('.platform-item');
+                        const item = platformItems[index];
+                        item.querySelector('.platform-name').value = platform.name || '';
+                        item.querySelector('.platform-status').value = platform.status || '';
+                        item.querySelector('.platform-url').value = platform.url || '';
+                        item.querySelector('.platform-icon').value = platform.icon || '';
+                        generateCode();
+                    }, 50);
+                });
+            }
+            
+            // Load Trailers
+            if (post.trailers && post.trailers.length > 0) {
+                post.trailers.forEach(trailer => {
+                    addTrailer();
+                    const index = trailers.length - 1;
+                    setTimeout(() => {
+                        const trailerItems = document.querySelectorAll('.trailer-item');
+                        const item = trailerItems[index];
+                        item.querySelector('.trailer-title').value = trailer.title || '';
+                        item.querySelector('.trailer-description').value = trailer.description || '';
+                        item.querySelector('.trailer-thumbnail').value = trailer.thumbnail || '';
+                        item.querySelector('.trailer-video-id').value = trailer.videoId || '';
+                        generateCode();
+                    }, 50);
+                });
+            }
+            
+            // Generate code after loading
+            setTimeout(() => {
+                generateCode();
+                alert(`✅ Loaded post: ${post.title} (ID: ${post.id})`);
+            }, 100);
+        }
+        
+        // Load posts data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPostsData();
+            displayRecentPostId();
+        });
+        
+        // Display the most recent post ID
+        function displayRecentPostId() {
+            loadPostsData();
+            
+            if (postsData.length === 0) {
+                document.getElementById('recentPostId').textContent = 'No posts yet';
+                document.getElementById('nextPostId').textContent = '1';
+                return;
+            }
+            
+            // Find the highest ID
+            const maxId = Math.max(...postsData.map(p => parseInt(p.id) || 0));
+            const nextId = maxId + 1;
+            
+            document.getElementById('recentPostId').textContent = maxId;
+            document.getElementById('nextPostId').textContent = nextId;
+            
+            console.log(`📊 Recent Post ID: ${maxId}, Next ID: ${nextId}`);
+        }
+
+        function addCastMember() {
+            const index = castMembers.length;
+            const castHtml = `
+                <div class="cast-item" id="cast-${index}" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: #1e4fa1;">Cast Member ${index + 1}</strong>
+                        <button onclick="removeCastMember(${index}); return false;" style="background: #ef4444; border: none; color: white; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                    <input type="text" class="cast-actor-name" placeholder="Actor Name (e.g., Sai Sujith)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="cast-character-name" placeholder="Character Name (e.g., Okarun)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="cast-platform" placeholder="Platform (e.g., Crunchyroll, Netflix)" list="platformOptions" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <datalist id="platformOptions">
+                        <option value="Crunchyroll">
+                        <option value="Netflix">
+                        <option value="Anime Times">
+                        <option value="JioHotstar">
+                        <option value="Disney">
+                        <option value="Muse">
+                    </datalist>
+                    <input type="text" class="cast-actor-image" placeholder="Actor Image URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="cast-character-image" placeholder="Character Image URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <textarea class="cast-description" placeholder="Description (Optional - Shows in More Info popup)" rows="2" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; resize: vertical; font-family: inherit;" oninput="generateCode()"></textarea>
+                    <input type="text" class="cast-instagram" placeholder="Instagram Username (Optional - e.g., saisujith_official)" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                </div>
+            `;
+            document.getElementById('castContainer').insertAdjacentHTML('beforeend', castHtml);
+            castMembers.push(index);
+            generateCode();
+        }
+
+        function removeCastMember(index) {
+            document.getElementById(`cast-${index}`).remove();
+            castMembers = castMembers.filter(i => i !== index);
+            generateCode();
+        }
+
+        function addCrewMember() {
+            const index = crewMembers.length;
+            const crewHtml = `
+                <div class="crew-item" id="crew-${index}" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: #f59e0b;">Crew Member ${index + 1}</strong>
+                        <button onclick="removeCrewMember(${index}); return false;" style="background: #ef4444; border: none; color: white; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                    <input type="text" class="crew-name" placeholder="Name (e.g., Govardiniprakash)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="crew-role" placeholder="Role (e.g., Script Writer)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="crew-platform" placeholder="Platform (e.g., Crunchyroll)" list="platformOptions" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="crew-avatar" placeholder="Avatar URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="crew-project-image" placeholder="Project Image URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <textarea class="crew-description" placeholder="Description (Optional - Shows in More Info popup)" rows="2" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; resize: vertical; font-family: inherit;" oninput="generateCode()"></textarea>
+                    <input type="text" class="crew-instagram" placeholder="Instagram Username (Optional - e.g., govardini_official)" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                </div>
+            `;
+            document.getElementById('crewContainer').insertAdjacentHTML('beforeend', crewHtml);
+            crewMembers.push(index);
+            generateCode();
+        }
+
+        function removeCrewMember(index) {
+            document.getElementById(`crew-${index}`).remove();
+            crewMembers = crewMembers.filter(i => i !== index);
+            generateCode();
+        }
+
+        let dubbingStudios = [];
+        
+        function addDubbingStudio() {
+            const index = dubbingStudios.length;
+            const studioHtml = `
+                <div class="studio-item" id="studio-${index}" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: #8b5cf6;">Dubbing Studio ${index + 1}</strong>
+                        <button onclick="removeDubbingStudio(${index}); return false;" style="background: #ef4444; border: none; color: white; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                    <input type="text" class="studio-name" placeholder="Studio Name (e.g., Crunchyroll Dubs)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="studio-role" placeholder="Role (e.g., Dubbing Studio)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="studio-platform" placeholder="Platform (e.g., Crunchyroll)" list="platformOptions" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="studio-avatar" placeholder="Studio Logo URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="studio-project-image" placeholder="Project Image URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <textarea class="studio-description" placeholder="Description (Optional - Shows in More Info popup)" rows="2" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; resize: vertical; font-family: inherit;" oninput="generateCode()"></textarea>
+                    <input type="text" class="studio-instagram" placeholder="Instagram Username (Optional - e.g., studio_official)" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                </div>
+            `;
+            document.getElementById('dubbingStudiosContainer').insertAdjacentHTML('beforeend', studioHtml);
+            dubbingStudios.push(index);
+            generateCode();
+        }
+
+        function removeDubbingStudio(index) {
+            document.getElementById(`studio-${index}`).remove();
+            dubbingStudios = dubbingStudios.filter(i => i !== index);
+            generateCode();
+        }
+
+        function addTrailer() {
+            const index = trailers.length;
+            const trailerHtml = `
+                <div class="trailer-item" id="trailer-${index}" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: #10b981;">Trailer ${index + 1}</strong>
+                        <button onclick="removeTrailer(${index}); return false;" style="background: #ef4444; border: none; color: white; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                    <input type="text" class="trailer-title" placeholder="Trailer Title (e.g., Official Trailer)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="trailer-description" placeholder="Description (e.g., Dandadan Trailer)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="trailer-thumbnail" placeholder="Thumbnail URL" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="trailer-video-id" placeholder="YouTube Video ID (e.g., Jl_L50tDZ7Q)" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                </div>
+            `;
+            document.getElementById('trailersContainer').insertAdjacentHTML('beforeend', trailerHtml);
+            trailers.push(index);
+            generateCode();
+        }
+
+        function removeTrailer(index) {
+            document.getElementById(`trailer-${index}`).remove();
+            trailers = trailers.filter(i => i !== index);
+            generateCode();
+        }
+
+        function addPlatform() {
+            const index = platforms.length;
+            const platformHtml = `
+                <div class="platform-item" id="platform-${index}" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: #8b5cf6;">Platform ${index + 1}</strong>
+                        <button onclick="removePlatform(${index}); return false;" style="background: #ef4444; border: none; color: white; padding: 4px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                    <input type="text" class="platform-name" placeholder="Platform Name (e.g., Crunchyroll)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="platform-status" placeholder="Status (e.g., Available)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="platform-url" placeholder="Platform URL (e.g., https://crunchyroll.com)" style="width: 100%; margin-bottom: 8px; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                    <input type="text" class="platform-icon" placeholder="Icon URL" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;" oninput="generateCode()">
+                </div>
+            `;
+            document.getElementById('platformsContainer').insertAdjacentHTML('beforeend', platformHtml);
+            platforms.push(index);
+            generateCode();
+        }
+
+        function removePlatform(index) {
+            document.getElementById(`platform-${index}`).remove();
+            platforms = platforms.filter(i => i !== index);
+            generateCode();
+        }
+
+        function generateCode() {
+            const id = document.getElementById('id').value || '1';
+            const title = document.getElementById('title').value || 'Untitled Anime';
+            const year = document.getElementById('year').value || '2024';
+            const season = document.getElementById('season').value || 'Fall';
+            const rating = document.getElementById('rating').value || '8.0';
+            const ageRating = document.getElementById('ageRating').value || 'PG-13';
+            const poster = document.getElementById('poster').value || 'https://via.placeholder.com/300x450';
+            const backdrop = document.getElementById('backdrop').value || 'https://via.placeholder.com/1920x1080';
+            const genres = document.getElementById('genres').value || 'Action, Adventure';
+            const synopsis = document.getElementById('synopsis').value || 'No synopsis available.';
+            const studio = document.getElementById('studio').value || 'Unknown Studio';
+            const format = document.getElementById('format').value || 'Season 01';
+            const duration = document.getElementById('duration').value || '24 min';
+            const totalEpisodes = document.getElementById('totalEpisodes').value || '12';
+            const premiereDate = document.getElementById('premiereDate').value || 'Released on 2024';
+            const status = document.getElementById('status').value || 'Completed';
+            const broadcast = document.getElementById('broadcast').value || 'OTT';
+            const language = document.getElementById('language').value || 'Telugu Dub Available';
+            const platformLabel = document.getElementById('platformLabel').value || '';
+            const viewCount = document.getElementById('viewCount').value || '1M';
+            const likedPercentage = document.getElementById('likedPercentage').value || '90%';
+            const mrp = document.getElementById('mrp').value || 'none';
+            const spoilerAlert = document.getElementById('spoilerAlert').value || 'none';
+
+            const genresArray = genres.split(',').map(g => `"${g.trim()}"`).join(', ');
+
+            // Collect Cast Members
+            const castArray = [];
+            document.querySelectorAll('.cast-item').forEach(item => {
+                const actorName = item.querySelector('.cast-actor-name').value;
+                const characterName = item.querySelector('.cast-character-name').value;
+                const platform = item.querySelector('.cast-platform').value;
+                const actorImage = item.querySelector('.cast-actor-image').value;
+                const characterImage = item.querySelector('.cast-character-image').value;
+                const description = item.querySelector('.cast-description').value;
+                const instagram = item.querySelector('.cast-instagram').value;
+                
+                if (actorName || characterName) {
+                    castArray.push(`        {
+            "actorName": "${actorName}",
+            "characterName": "${characterName}",
+            "platform": "${platform}",
+            "actorImage": "${actorImage}",
+            "characterImage": "${characterImage}"${description ? `,\n            "description": "${description}"` : ''}${instagram ? `,\n            "instagram": "${instagram}"` : ''}
+        }`);
+                }
+            });
+
+            // Collect Crew Members
+            const crewArray = [];
+            document.querySelectorAll('.crew-item').forEach(item => {
+                const name = item.querySelector('.crew-name').value;
+                const role = item.querySelector('.crew-role').value;
+                const platform = item.querySelector('.crew-platform').value;
+                const avatar = item.querySelector('.crew-avatar').value;
+                const projectImage = item.querySelector('.crew-project-image').value;
+                const description = item.querySelector('.crew-description').value;
+                const instagram = item.querySelector('.crew-instagram').value;
+                
+                if (name || role) {
+                    crewArray.push(`        {
+            "name": "${name}",
+            "role": "${role}",
+            "platform": "${platform}",
+            "avatar": "${avatar}",
+            "projectImage": "${projectImage}"${description ? `,\n            "description": "${description}"` : ''}${instagram ? `,\n            "instagram": "${instagram}"` : ''}
+        }`);
+                }
+            });
+
+            // Collect Dubbing Studios
+            const dubbingStudiosArray = [];
+            document.querySelectorAll('.studio-item').forEach(item => {
+                const name = item.querySelector('.studio-name').value;
+                const role = item.querySelector('.studio-role').value;
+                const platform = item.querySelector('.studio-platform').value;
+                const avatar = item.querySelector('.studio-avatar').value;
+                const projectImage = item.querySelector('.studio-project-image').value;
+                const description = item.querySelector('.studio-description').value;
+                const instagram = item.querySelector('.studio-instagram').value;
+                
+                if (name || role) {
+                    dubbingStudiosArray.push(`        {
+            "name": "${name}",
+            "role": "${role}",
+            "platform": "${platform}",
+            "avatar": "${avatar}",
+            "projectImage": "${projectImage}"${description ? `,\n            "description": "${description}"` : ''}${instagram ? `,\n            "instagram": "${instagram}"` : ''}
+        }`);
+                }
+            });
+
+            // Collect Platforms
+            const platformsArray = [];
+            document.querySelectorAll('.platform-item').forEach(item => {
+                const name = item.querySelector('.platform-name').value;
+                const status = item.querySelector('.platform-status').value;
+                const url = item.querySelector('.platform-url').value;
+                const icon = item.querySelector('.platform-icon').value;
+                
+                if (name) {
+                    platformsArray.push(`        {
+            "name": "${name}",
+            "status": "${status}",
+            "url": "${url}",
+            "icon": "${icon}"
+        }`);
+                }
+            });
+
+            // Collect Trailers
+            const trailersArray = [];
+            document.querySelectorAll('.trailer-item').forEach(item => {
+                const title = item.querySelector('.trailer-title').value;
+                const description = item.querySelector('.trailer-description').value;
+                const thumbnail = item.querySelector('.trailer-thumbnail').value;
+                const videoId = item.querySelector('.trailer-video-id').value;
+                
+                if (title || videoId) {
+                    trailersArray.push(`        {
+            "title": "${title}",
+            "description": "${description}",
+            "thumbnail": "${thumbnail}",
+            "videoId": "${videoId}"
+        }`);
+                }
+            });
+
+            const code = `{
+    "id": ${id},
+    "title": "${title}",
+    "year": "${year}",
+    "season": "${season}",
+    "rating": "${rating}",
+    "ageRating": "${ageRating}",
+    "poster": "${poster}",
+    "backdrop": "${backdrop}",
+    "genres": "${genres}",
+    "synopsis": "${synopsis}",
+    "spoilerAlert": "${spoilerAlert}",
+    "studio": "${studio}",
+    "format": "${format}",
+    "duration": "${duration}",
+    "totalEpisodes": "${totalEpisodes}",
+    "premiereDate": "${premiereDate}",
+    "status": "${status}",
+    "broadcast": "${broadcast}",
+    "language": "${language}",
+    "airSeason": "${season}",
+    "platformLabel": "${platformLabel}",
+    "mrp": "${mrp}",
+    "viewCount": "${viewCount}",
+    "categories": [${genresArray}],
+    "labels": ["Telugu Dub"],
+    "statistics": {
+        "rating": "${rating}",
+        "likedPercentage": "${likedPercentage}",
+        "totalViews": "${viewCount}"
+    },
+    "cast": [
+${castArray.join(',\n')}
+    ],
+    "crew": [
+${crewArray.join(',\n')}
+    ],
+    "dubbingStudios": [
+${dubbingStudiosArray.join(',\n')}
+    ],
+    "platforms": [
+${platformsArray.join(',\n')}
+    ],
+    "trailers": [
+${trailersArray.join(',\n')}
+    ]
+}`;
+
+            document.getElementById('output').textContent = code;
+        }
+
+        function copyCode() {
+            const output = document.getElementById('output').textContent;
+            
+            if (output.trim() === '// Your generated code will appear here...') {
+                alert('Please generate code first!');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                showToast();
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function loadExample1() {
+            // Clear existing
+            document.getElementById('castContainer').innerHTML = '';
+            document.getElementById('crewContainer').innerHTML = '';
+            document.getElementById('dubbingStudiosContainer').innerHTML = '';
+            document.getElementById('platformsContainer').innerHTML = '';
+            document.getElementById('trailersContainer').innerHTML = '';
+            castMembers = [];
+            crewMembers = [];
+            platforms = [];
+            trailers = [];
+
+            document.getElementById('id').value = '2';
+            document.getElementById('title').value = 'DanDaDan';
+            document.getElementById('year').value = '2024';
+            document.getElementById('season').value = 'Fall';
+            document.getElementById('rating').value = '8.3';
+            document.getElementById('ageRating').value = 'PG-18';
+            document.getElementById('poster').value = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7xLFElqSEYG5ykrx82TfqmYLjpkVckixcvaNoWpqzO-z-HuIiP1_dYBERLfYEyMU7ZPehuQuj-UWOWHanmA3_ll683gz7_5caehDcvn2VMsGlnO1ED83UYI03zz3G-VCYZlVRigWDq221ls5SW2AVPqkkyqDrd3gQX2n9F5QLMKUFvDUKQ9ca5a0QQfY/s16000/dandadan.jpg';
+            document.getElementById('backdrop').value = 'https://epicflix.com/img/containers/assets/dandadan.png/9c76cbca39a69c1bacc44e8b22169cdb.png';
+            document.getElementById('genres').value = 'Action, Adventure, Comedy';
+            document.getElementById('synopsis').value = 'Zenshu – Season 1 is a supernatural action-fantasy anime that follows a young boy who unknowingly awakens an ancient guardian spirit tied to his bloodline.';
+            document.getElementById('studio').value = 'Science SARU';
+            document.getElementById('format').value = 'Season 01';
+            document.getElementById('duration').value = '24 min';
+            document.getElementById('totalEpisodes').value = '12';
+            document.getElementById('premiereDate').value = 'Released on 2024';
+            document.getElementById('status').value = 'Completed';
+            document.getElementById('broadcast').value = 'OTT (Crunchyroll)';
+            document.getElementById('language').value = 'Telugu Dub Available';
+            document.getElementById('viewCount').value = '2.1M';
+            document.getElementById('likedPercentage').value = '92%';
+
+            // Add Cast
+            addCastMember();
+            setTimeout(() => {
+                document.querySelectorAll('.cast-actor-name')[0].value = 'Sai Sujith';
+                document.querySelectorAll('.cast-character-name')[0].value = 'Okarun';
+                document.querySelectorAll('.cast-actor-image')[0].value = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwALrO96FUcdMYrVONs7MYHgDAHXUE-g-6YgKSUx2tSltG_77AcOyuyravuihg1H8fKn86vbmk2CE9Y85GiE2mEwa6V597tH74Aq2kd0eNIEL1Ka9-OMtbhDR6Iq_NQEIUOEwg7IUuSX-0-uw2SmWIZ9x9b1-u6fwsQ0_8U5gDCxfwQ8MXxPKonx4KT6I/s16000/Uncle%20look%20Vandhuducho%20%F0%9F%98%90.jpg';
+                document.querySelectorAll('.cast-character-image')[0].value = 'https://i.pinimg.com/1200x/89/4c/ff/894cffe0e261788602d578e86b12e532.jpg';
+                
+                addCastMember();
+                document.querySelectorAll('.cast-actor-name')[1].value = 'Govardiniprakash';
+                document.querySelectorAll('.cast-character-name')[1].value = 'Momo Ayase';
+                document.querySelectorAll('.cast-actor-image')[1].value = 'https://blogger.googleusercontent.com/img/a/AVvXsEgqSAoFrLipdqwCxIPX5XlfrVUdkzLsUgLP2kBrKm0WmYZ4cR24RnY1jVcg_bwtmC_TSHZYaBtBqDQsmy02kDdQAjYv2iC51E__lTKzvMkh9Sj64_wrPot2URldD5C5oCZDdY368nc0punGcbwdXDgaNAGA9cYhwlfTnlFcjNWbFQ7p_Qcz5o4H3yAbsUU=s16000';
+                document.querySelectorAll('.cast-character-image')[1].value = 'https://i.pinimg.com/736x/2d/7d/4b/2d7d4b9971a3fb5794ed0cd2391e67eb.jpg';
+
+                // Add Crew
+                addCrewMember();
+                document.querySelectorAll('.crew-name')[0].value = 'Govardiniprakash';
+                document.querySelectorAll('.crew-role')[0].value = 'Script Writer';
+                document.querySelectorAll('.crew-avatar')[0].value = 'https://blogger.googleusercontent.com/img/a/AVvXsEgqSAoFrLipdqwCxIPX5XlfrVUdkzLsUgLP2kBrKm0WmYZ4cR24RnY1jVcg_bwtmC_TSHZYaBtBqDQsmy02kDdQAjYv2iC51E__lTKzvMkh9Sj64_wrPot2URldD5C5oCZDdY368nc0punGcbwdXDgaNAGA9cYhwlfTnlFcjNWbFQ7p_Qcz5o4H3yAbsUU=s16000';
+                document.querySelectorAll('.crew-project-image')[0].value = 'https://i.pinimg.com/736x/61/da/4b/61da4b8bc214fa53da718e8355af0e85.jpg';
+
+                // Add Platform
+                addPlatform();
+                document.querySelectorAll('.platform-name')[0].value = 'Crunchyroll';
+                document.querySelectorAll('.platform-status')[0].value = 'Available';
+                document.querySelectorAll('.platform-url')[0].value = 'https://www.crunchyroll.com';
+                document.querySelectorAll('.platform-icon')[0].value = 'https://logos-marcas.com/wp-content/uploads/2021/03/Crunchyroll-Logotipo-2012-presente.jpg';
+
+                // Add Trailer
+                addTrailer();
+                document.querySelectorAll('.trailer-title')[0].value = 'Official Trailer';
+                document.querySelectorAll('.trailer-description')[0].value = 'Dandadan Trailer';
+                document.querySelectorAll('.trailer-thumbnail')[0].value = 'https://epicflix.com/img/containers/assets/dandadan.png/9c76cbca39a69c1bacc44e8b22169cdb.png';
+                document.querySelectorAll('.trailer-video-id')[0].value = 'Jl_L50tDZ7Q';
+
+                generateCode();
+            }, 100);
+        }
+
+        function loadExample2() {
+            document.getElementById('id').value = '3';
+            document.getElementById('title').value = 'Demon Slayer: Kimetsu no Yaiba';
+            document.getElementById('year').value = '2019';
+            document.getElementById('season').value = 'Spring';
+            document.getElementById('rating').value = '8.7';
+            document.getElementById('ageRating').value = 'PG-13';
+            document.getElementById('poster').value = 'https://via.placeholder.com/300x450/FF0000/FFFFFF?text=Demon+Slayer';
+            document.getElementById('backdrop').value = 'https://via.placeholder.com/1920x1080/FF0000/FFFFFF?text=Demon+Slayer';
+            document.getElementById('genres').value = 'Action, Fantasy, Supernatural';
+            document.getElementById('synopsis').value = 'A family is attacked by demons and only two members survive - Tanjiro and his sister Nezuko, who is turning into a demon slowly.';
+            document.getElementById('studio').value = 'ufotable';
+            document.getElementById('format').value = 'Season 01';
+            document.getElementById('duration').value = '24 min';
+            document.getElementById('totalEpisodes').value = '26';
+            document.getElementById('premiereDate').value = 'Released on 2019';
+            document.getElementById('status').value = 'Completed';
+            document.getElementById('broadcast').value = 'OTT (Crunchyroll)';
+            document.getElementById('language').value = 'Telugu Dub Available';
+            document.getElementById('viewCount').value = '5.2M';
+            document.getElementById('likedPercentage').value = '95%';
+            document.getElementById('trailerVideoId').value = 'VQGCKyvzIM4';
+            document.getElementById('trailerTitle').value = 'Official Trailer';
+            document.getElementById('trailerDescription').value = 'Demon Slayer Trailer';
+            generateCode();
+        }
+
+        function loadExample3() {
+            document.getElementById('id').value = '4';
+            document.getElementById('title').value = 'Attack on Titan';
+            document.getElementById('year').value = '2013';
+            document.getElementById('season').value = 'Spring';
+            document.getElementById('rating').value = '9.0';
+            document.getElementById('ageRating').value = 'R-17';
+            document.getElementById('poster').value = 'https://via.placeholder.com/300x450/8B4513/FFFFFF?text=Attack+on+Titan';
+            document.getElementById('backdrop').value = 'https://via.placeholder.com/1920x1080/8B4513/FFFFFF?text=Attack+on+Titan';
+            document.getElementById('genres').value = 'Action, Drama, Dark Fantasy';
+            document.getElementById('synopsis').value = 'After his hometown is destroyed and his mother is killed, young Eren Jaeger vows to cleanse the earth of the giant humanoid Titans.';
+            document.getElementById('studio').value = 'MAPPA';
+            document.getElementById('format').value = 'Season 01';
+            document.getElementById('duration').value = '24 min';
+            document.getElementById('totalEpisodes').value = '25';
+            document.getElementById('premiereDate').value = 'Released on 2013';
+            document.getElementById('status').value = 'Completed';
+            document.getElementById('broadcast').value = 'OTT (Crunchyroll)';
+            document.getElementById('language').value = 'Telugu Dub Available';
+            document.getElementById('viewCount').value = '8.5M';
+            document.getElementById('likedPercentage').value = '98%';
+            document.getElementById('trailerVideoId').value = 'MGRm4IzK1SQ';
+            document.getElementById('trailerTitle').value = 'Official Trailer';
+            document.getElementById('trailerDescription').value = 'Attack on Titan Trailer';
+            generateCode();
+        }
+
+        // Auto-generate on input change
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('input', generateCode);
+        });
+
+
+    </script>
+</body>
+</html>
